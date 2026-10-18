@@ -8,187 +8,253 @@
 <meta property="og:title" content="Jungwoo Lee">
 <meta property="og:description" content="Work &amp; Research · Hobbies · Knowledge.">
 <meta property="og:url" content="https://jungwoo-lee-dev.github.io/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta property="og:image" content="https://jungwoo-lee-dev.github.io/avatar.jpg">
+<link rel="icon" href="avatar.jpg">
 <style>
   :root {
-    --bg: #fbfbfa;
-    --surface: #ffffff;
-    --text: #1c1c1e;
-    --muted: #6b6b70;
-    --line: #e6e6e3;
-    --accent: #2f5bd3;
-    --accent-soft: #eaf0fd;
-    --chip: #f2f2ef;
+    --bg: #ffffff;
+    --text: #171717;
+    --muted: #686868;
+    --line: #e4e4e4;
+    --line-strong: #a8a8a8;
+    --accent: #245b9e;
+    --soft: #f2f2f2;
+    --header-bg: rgba(255, 255, 255, 0.94);
+    --page: 860px;
+    --header-h: 64px;
+    color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #121214;
-      --surface: #1a1a1d;
-      --text: #ececee;
-      --muted: #9a9aa2;
-      --line: #2a2a2f;
-      --accent: #7ea2ff;
-      --accent-soft: #1d2640;
-      --chip: #232327;
+      --bg: #111112;
+      --text: #ededed;
+      --muted: #9a9a9a;
+      --line: #2a2a2c;
+      --line-strong: #555;
+      --accent: #7fa8e0;
+      --soft: #1e1e20;
+      --header-bg: rgba(17, 17, 18, 0.94);
+      color-scheme: dark;
     }
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 24px); }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 16px/1.65 Inter, system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Apple SD Gothic Neo", sans-serif;
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  a { color: var(--accent); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .inner { width: min(calc(100% - 32px), var(--page)); margin: 0 auto; }
 
-  header { padding: 72px 0 40px; }
-  h1 { font-size: 2.4rem; line-height: 1.15; margin: 0 0 16px; letter-spacing: -0.02em; }
-  .tagline { font-size: 1.15rem; margin: 0 0 24px; max-width: 42ch; }
-  .links { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
-  .links a {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px;
-    background: var(--surface); color: var(--text); font-weight: 500; font-size: 0.93rem;
+  /* Header */
+  .site-header { position: sticky; top: 0; z-index: 10; background: var(--header-bg); backdrop-filter: blur(8px); }
+  .site-header .inner { min-height: var(--header-h); display: flex; align-items: center; }
+  .site-title { color: var(--text); font-size: .95rem; font-weight: 600; text-decoration: none; }
+
+  /* Intro */
+  .intro {
+    display: grid; grid-template-columns: minmax(0, 1fr) 176px;
+    grid-template-rows: min-content 1fr; gap: 16px 32px; padding-top: 48px;
   }
-  .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-  .links svg { width: 16px; height: 16px; fill: currentColor; flex: none; }
-
-  section { padding: 36px 0; border-top: 1px solid var(--line); }
-  h2 {
-    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--muted); margin: 0 0 20px; font-weight: 600;
+  .intro h1 { grid-area: 1 / 1; margin: 0; font-size: 2rem; line-height: 1.2; letter-spacing: -.03em; }
+  .role { display: inline-block; min-width: 10ch; white-space: nowrap; }
+  .role::after {
+    content: ""; display: inline-block; height: .9em; margin-left: 2px; vertical-align: -.08em;
+    border-right: 2px solid; animation: blink 1s step-end infinite;
   }
-  h3 { font-size: 1.05rem; margin: 0; }
-  p { margin: 0 0 14px; }
-
-  .card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
-    padding: 18px 20px; margin-bottom: 14px;
+  @keyframes blink { 50% { opacity: 0; } }
+  .bio { grid-area: 2 / 1; margin: 0; max-width: 620px; line-height: 1.72; }
+  .portrait { grid-area: 1 / 2 / span 2; margin: 0; }
+  .portrait img { width: 176px; height: 176px; border-radius: 50%; border: 1px solid var(--line); display: block; }
+  .social { display: flex; justify-content: center; gap: 8px; margin-top: 8px; padding-bottom: 16px; position: relative; }
+  .social a, .social button {
+    width: 28px; height: 28px; display: grid; place-items: center; padding: 0;
+    color: var(--text); background: none; border: 0; cursor: pointer;
   }
-  .card-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
-  .meta { color: var(--muted); font-size: 0.88rem; white-space: nowrap; }
-  .card p { margin: 8px 0 0; }
-  .card ul { margin: 10px 0 0; padding-left: 20px; }
-  .card li { margin: 4px 0; }
-  .result { color: var(--text); font-weight: 600; }
+  .social a:hover, .social button:hover { opacity: .65; }
+  .social svg { width: 16px; height: 16px; fill: currentColor; }
+  .copied { position: absolute; top: 30px; left: 0; width: 100%; text-align: center; color: var(--muted); font-size: .78rem; }
 
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; padding: 0; list-style: none; }
-  .tags li { background: var(--chip); border-radius: 6px; padding: 2px 9px; font-size: 0.8rem; color: var(--muted); }
-
-  .card-links { margin-top: 12px; font-size: 0.9rem; display: flex; gap: 16px; flex-wrap: wrap; }
-
-  .soon {
-    border-style: dashed; background: transparent;
+  /* Tabs */
+  .tabs {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(100%, 420px);
+    margin: 32px 0 24px; padding: 3px; border-radius: 999px; background: var(--soft);
   }
-  .badge {
-    display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
-    background: var(--accent-soft); color: var(--accent); border-radius: 6px; padding: 2px 8px;
-    margin-left: 8px; vertical-align: middle;
+  .tabs button {
+    font: inherit; font-size: .78rem; min-height: 30px; padding: 0 12px; line-height: 1;
+    border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer; white-space: nowrap;
   }
+  .tabs button[aria-selected="true"] { background: var(--text); color: var(--bg); font-weight: 600; }
+  [hidden] { display: none !important; }
 
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
-  .filters button {
-    font: inherit; font-size: 0.88rem; font-weight: 500; cursor: pointer;
-    padding: 5px 14px; border-radius: 999px; border: 1px solid var(--line);
-    background: var(--surface); color: var(--muted);
+  /* Sections and items */
+  .section + .section { padding-top: 32px; }
+  .section h2 { margin: 0 0 24px; font-size: 1.1rem; font-weight: 600; letter-spacing: -.01em; }
+  .items { list-style: none; margin: 0; padding: 0; }
+  .item { padding: 0 0 24px; }
+  .item + .item { padding-top: 24px; border-top: 1px solid var(--line); }
+  .meta { margin: 0 0 4px; color: var(--muted); font-size: .78rem; }
+  .item h3 { margin: 0; font-size: .95rem; font-weight: 600; line-height: 1.45; }
+  .item h3 a { color: inherit; }
+  .summary { margin: 12px 0 0; max-width: 700px; color: var(--muted); font-size: .85rem; line-height: 1.55; }
+  .tags { display: flex; flex-wrap: wrap; margin-top: 8px; color: var(--muted); font-size: .78rem; }
+  .tags span:not(:last-child)::after { content: "·"; margin: 0 8px; color: var(--line-strong); }
+  .item-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; font-size: .85rem; }
+  .placeholder .summary { margin-top: 0; }
+
+  footer { margin-top: 72px; padding: 24px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
+
+  @media (max-width: 640px) {
+    .intro { grid-template-columns: 1fr; grid-template-rows: auto; padding-top: 32px; }
+    .portrait { grid-area: auto; order: -1; }
+    .portrait img { width: 112px; height: 112px; }
+    .social { justify-content: flex-start; }
+    .copied { text-align: left; }
+    .intro h1, .bio { grid-area: auto; }
+    .intro h1 { font-size: 1.7rem; }
+    .tabs button { padding: 0 6px; }
   }
-  .filters button.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-  .card.hidden { display: none; }
-
-
-  footer { padding: 36px 0 60px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; }
-
-  @media (max-width: 560px) {
-    header { padding: 48px 0 32px; }
-    h1 { font-size: 2rem; }
-    .meta { white-space: normal; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .role::after { animation: none; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <h1>Jungwoo Lee</h1>
-    <p class="tagline">Engineer in Japan. I like creating interesting things with implementation of AI.</p>
-    <ul class="links">
-      <li><a href="https://github.com/jungwoo-lee-dev">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        GitHub</a></li>
-      <li><a href="https://huggingface.co/jungwoo-lee-dev">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.6" cy="6.6" r="0.9"/><circle cx="10.4" cy="6.6" r="0.9"/><path d="M5 9.6c.7 1.3 1.8 1.9 3 1.9s2.3-.6 3-1.9" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-        Hugging Face</a></li>
-      <li><a href="https://www.linkedin.com/in/jungwoo-lee-7ab014262/">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.15C0 .52.52 0 1.18 0h13.64C15.48 0 16 .52 16 1.15v13.7c0 .63-.52 1.15-1.18 1.15H1.18C.52 16 0 15.48 0 14.85V1.15zM4.94 13.4V6.17H2.54v7.23h2.4zM3.74 5.18c.84 0 1.36-.56 1.36-1.25-.02-.71-.52-1.25-1.34-1.25-.82 0-1.36.54-1.36 1.25 0 .7.52 1.25 1.32 1.25h.02zM8.68 13.4V9.36c0-.22.02-.43.08-.59.18-.43.57-.88 1.23-.88.87 0 1.22.66 1.22 1.64v3.87h2.4V9.25c0-2.22-1.18-3.25-2.76-3.25-1.28 0-1.84.7-2.16 1.2v.03h-.02l.02-.03V6.17h-2.4c.03.68 0 7.23 0 7.23h2.4z"/></svg>
-        LinkedIn</a></li>
-      <li><a href="mailto:jwlee.edu@gmail.com">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3h13c.28 0 .5.22.5.5v9a.5.5 0 01-.5.5h-13a.5.5 0 01-.5-.5v-9c0-.28.22-.5.5-.5zm.5 1.3v7.7h12V4.3L8 8.6 2 4.3zM2.9 4l5.1 3.6L13.1 4H2.9z"/></svg>
-        Email</a></li>
-    </ul>
-  </header>
+<header class="site-header">
+  <div class="inner"><a class="site-title" href="/">Jungwoo Lee</a></div>
+</header>
 
-  <section id="about">
-    <h2>About</h2>
-    <p>I like building interesting and weird things with AI, whether that's for work, research, or fun.</p>
+<main class="inner">
+  <section class="intro" aria-labelledby="hello">
+    <h1 id="hello" aria-label="Hello, I'm a Builder, Researcher, Game Developer, and Musician">Hello, I'm a <span class="role" data-role aria-hidden="true">Builder</span></h1>
+    <figure class="portrait">
+      <img src="avatar.jpg" alt="Ace and five of hearts" width="176" height="176">
+      <nav class="social" aria-label="Links">
+        <a href="https://github.com/jungwoo-lee-dev" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a href="https://huggingface.co/jungwoo-lee-dev" aria-label="Hugging Face" title="Hugging Face">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.3" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="5.6" cy="6.6" r="1"/><circle cx="10.4" cy="6.6" r="1"/><path d="M5 9.6c.7 1.3 1.8 1.9 3 1.9s2.3-.6 3-1.9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/jungwoo-lee-7ab014262/" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.15C0 .52.52 0 1.18 0h13.64C15.48 0 16 .52 16 1.15v13.7c0 .63-.52 1.15-1.18 1.15H1.18C.52 16 0 15.48 0 14.85V1.15zM4.94 13.4V6.17H2.54v7.23h2.4zM3.74 5.18c.84 0 1.36-.56 1.36-1.25-.02-.71-.52-1.25-1.34-1.25-.82 0-1.36.54-1.36 1.25 0 .7.52 1.25 1.32 1.25h.02zM8.68 13.4V9.36c0-.22.02-.43.08-.59.18-.43.57-.88 1.23-.88.87 0 1.22.66 1.22 1.64v3.87h2.4V9.25c0-2.22-1.18-3.25-2.76-3.25-1.28 0-1.84.7-2.16 1.2v.03h-.02l.02-.03V6.17h-2.4c.03.68 0 7.23 0 7.23h2.4z"/></svg>
+        </a>
+        <button type="button" data-email="jwlee.edu@gmail.com" aria-label="Copy email address" title="Copy email address">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3h13c.28 0 .5.22.5.5v9a.5.5 0 01-.5.5h-13a.5.5 0 01-.5-.5v-9c0-.28.22-.5.5-.5zm.5 1.3v7.7h12V4.3L8 8.6 2 4.3zM2.9 4l5.1 3.6L13.1 4H2.9z"/></svg>
+        </button>
+        <span class="copied" data-copied role="status" aria-live="polite"></span>
+      </nav>
+    </figure>
+    <p class="bio">Engineer in Japan. I like creating interesting things with implementation of AI.</p>
   </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <!-- One list for everything. Give each card data-cat="work-research | hobbies | knowledge"
-         (space-separated if it fits more than one); the filter buttons read it. -->
-    <div class="filters" role="group" aria-label="Filter projects">
-      <button class="on" data-filter="all">All</button>
-      <button data-filter="work-research">Work &amp; Research</button>
-      <button data-filter="hobbies">Hobbies</button>
-      <button data-filter="knowledge">Knowledge</button>
-    </div>
+  <div class="tabs" role="tablist" aria-label="Choose a view">
+    <button role="tab" id="tab-work" aria-controls="work" aria-selected="true" data-tab="work">Work &amp; Research</button>
+    <button role="tab" id="tab-hobbies" aria-controls="hobbies" aria-selected="false" data-tab="hobbies" tabindex="-1">Hobbies</button>
+    <button role="tab" id="tab-knowledge" aria-controls="knowledge" aria-selected="false" data-tab="knowledge" tabindex="-1">Knowledge</button>
+  </div>
 
-    <div class="card soon" data-cat="work-research">
-      <div class="card-head">
-        <h3>Work &amp; Research</h3>
-      </div>
-      <p>Open datasets on Hugging Face and papers.</p>
-      <div class="card-links">
-        <a href="https://huggingface.co/jungwoo-lee-dev">Hugging Face profile →</a>
-      </div>
-    </div>
+  <!-- To add a project, put an <li class="item"> in the right panel and delete that panel's placeholder:
+       <li class="item">
+         <p class="meta">2026 · Hugging Face</p>
+         <h3><a href="https://...">Project name</a></h3>
+         <p class="summary">One or two lines on what it is and why it's interesting.</p>
+         <div class="tags"><span>Python</span><span>Dataset</span></div>
+         <div class="item-links"><a href="https://...">Code</a><a href="https://...">Dataset</a></div>
+       </li> -->
 
-    <div class="card soon" data-cat="hobbies">
-      <div class="card-head">
-        <h3>Hobbies</h3>
-      </div>
-      <p>Game development, music, and other side projects.</p>
-    </div>
+  <div role="tabpanel" id="work" aria-labelledby="tab-work">
+    <section class="section">
+      <h2>Work &amp; Research</h2>
+      <ul class="items">
+        <li class="item placeholder">
+          <p class="summary">Open datasets on Hugging Face and papers.</p>
+          <div class="item-links"><a href="https://huggingface.co/jungwoo-lee-dev">Hugging Face profile →</a></div>
+        </li>
+      </ul>
+    </section>
+  </div>
 
-    <div class="card soon" data-cat="knowledge">
-      <div class="card-head">
-        <h3>Knowledge</h3>
-      </div>
-      <p>Notes on AI tools, system development, etc.</p>
-    </div>
-  </section>
+  <div role="tabpanel" id="hobbies" aria-labelledby="tab-hobbies" hidden>
+    <section class="section">
+      <h2>Hobbies</h2>
+      <ul class="items">
+        <li class="item placeholder">
+          <p class="summary">Game development, music, and other side projects.</p>
+        </li>
+      </ul>
+    </section>
+  </div>
 
-  <footer>
-    <p>© 2026 Jungwoo Lee · <a href="mailto:jwlee.edu@gmail.com">jwlee.edu@gmail.com</a></p>
-  </footer>
+  <div role="tabpanel" id="knowledge" aria-labelledby="tab-knowledge" hidden>
+    <section class="section">
+      <h2>Knowledge</h2>
+      <ul class="items">
+        <li class="item placeholder">
+          <p class="summary">Notes on AI tools, system development, etc.</p>
+        </li>
+      </ul>
+    </section>
+  </div>
+</main>
 
-</div>
+<footer>
+  <div class="inner">© 2026 Jungwoo Lee</div>
+</footer>
+
 <script>
-  document.querySelectorAll('.filters button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const f = btn.dataset.filter;
-      document.querySelectorAll('.filters button').forEach(b => b.classList.toggle('on', b === btn));
-      document.querySelectorAll('#projects .card').forEach(card => {
-        const cats = (card.dataset.cat || '').split(' ');
-        card.classList.toggle('hidden', f !== 'all' && !cats.includes(f));
-      });
+  // Tabs: click, arrow keys, and #hash (e.g. /#hobbies) all pick a panel.
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  function select(id, focus) {
+    tabs.forEach(t => {
+      const on = t.dataset.tab === id;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.dataset.tab).hidden = !on;
+      if (on && focus) t.focus();
+    });
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => { select(t.dataset.tab); history.replaceState(null, '', '#' + t.dataset.tab); });
+    t.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) select(tabs[(i + d + tabs.length) % tabs.length].dataset.tab, true);
     });
   });
+  const start = location.hash.slice(1);
+  if (tabs.some(t => t.dataset.tab === start)) select(start);
+
+  // Copy email.
+  const mail = document.querySelector('[data-email]');
+  const note = document.querySelector('[data-copied]');
+  let timer;
+  mail.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(mail.dataset.email); note.textContent = 'Copied'; }
+    catch { location.href = 'mailto:' + mail.dataset.email; }
+    clearTimeout(timer);
+    timer = setTimeout(() => { note.textContent = ''; }, 2000);
+  });
+
+  // Typing roles.
+  const role = document.querySelector('[data-role]');
+  const roles = ['Builder', 'Researcher', 'Game Developer', 'Musician'];
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let r = 0;
+    const type = (w, n) => {
+      role.textContent = w.slice(0, n);
+      n < w.length ? setTimeout(() => type(w, n + 1), 100) : setTimeout(() => erase(w, n), 2000);
+    };
+    const erase = (w, n) => {
+      role.textContent = w.slice(0, n);
+      n > 0 ? setTimeout(() => erase(w, n - 1), 65) : (r = (r + 1) % roles.length, setTimeout(() => type(roles[r], 1), 300));
+    };
+    setTimeout(() => erase(roles[0], roles[0].length), 2000);
+  }
 </script>
 </body>
 </html>
