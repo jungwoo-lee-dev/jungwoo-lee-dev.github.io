@@ -24,19 +24,6 @@
     --header-h: 64px;
     color-scheme: light;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #111112;
-      --text: #ededed;
-      --muted: #9a9a9a;
-      --line: #2a2a2c;
-      --line-strong: #555;
-      --accent: #7fa8e0;
-      --soft: #1e1e20;
-      --header-bg: rgba(17, 17, 18, 0.94);
-      color-scheme: dark;
-    }
-  }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 24px); }
   body {
@@ -60,12 +47,6 @@
     grid-template-rows: min-content 1fr; gap: 16px 32px; padding-top: 48px;
   }
   .intro h1 { grid-area: 1 / 1; margin: 0; font-size: 2rem; line-height: 1.2; letter-spacing: -.03em; }
-  .role { display: inline-block; min-width: 10ch; white-space: nowrap; }
-  .role::after {
-    content: ""; display: inline-block; height: .9em; margin-left: 2px; vertical-align: -.08em;
-    border-right: 2px solid; animation: blink 1s step-end infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
   .bio { grid-area: 2 / 1; margin: 0; max-width: 620px; line-height: 1.72; }
   .portrait { grid-area: 1 / 2 / span 2; margin: 0; }
   .portrait img { width: 176px; height: 176px; border-radius: 50%; border: 1px solid var(--line); display: block; }
@@ -119,7 +100,6 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .role::after { animation: none; }
   }
 </style>
 </head>
@@ -131,7 +111,7 @@
 
 <main class="inner">
   <section class="intro" aria-labelledby="hello">
-    <h1 id="hello" aria-label="Hello, I'm a Builder, Researcher, Game Developer, and Musician">Hello, I'm a <span class="role" data-role aria-hidden="true">Builder</span></h1>
+    <h1 id="hello">Hello, I'm Jungwoo Lee</h1>
     <figure class="portrait">
       <img src="avatar.jpg" alt="Ace and five of hearts" width="176" height="176">
       <nav class="social" aria-label="Links">
@@ -174,7 +154,6 @@
       <ul class="items">
         <li class="item placeholder">
           <p class="summary">Open datasets on Hugging Face and papers.</p>
-          <div class="item-links"><a href="https://huggingface.co/jungwoo-lee-dev">Hugging Face profile →</a></div>
         </li>
       </ul>
     </section>
@@ -240,21 +219,6 @@
     timer = setTimeout(() => { note.textContent = ''; }, 2000);
   });
 
-  // Typing roles.
-  const role = document.querySelector('[data-role]');
-  const roles = ['Builder', 'Researcher', 'Game Developer', 'Musician'];
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let r = 0;
-    const type = (w, n) => {
-      role.textContent = w.slice(0, n);
-      n < w.length ? setTimeout(() => type(w, n + 1), 100) : setTimeout(() => erase(w, n), 2000);
-    };
-    const erase = (w, n) => {
-      role.textContent = w.slice(0, n);
-      n > 0 ? setTimeout(() => erase(w, n - 1), 65) : (r = (r + 1) % roles.length, setTimeout(() => type(roles[r], 1), 300));
-    };
-    setTimeout(() => erase(roles[0], roles[0].length), 2000);
-  }
 </script>
 </body>
 </html>
